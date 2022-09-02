@@ -4,7 +4,14 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
-const CalcButton = () => {
+const CalcButton = ({
+  firstNumber,
+  setFirstNumber,
+  lastNumber,
+  setLastNumber,
+  output,
+  setOutput,
+}) => {
   const numbers = [
     { id: 0, symbol: "AC" },
     { id: 1, symbol: "+/-" },
@@ -27,14 +34,20 @@ const CalcButton = () => {
     { id: 18, symbol: "." },
     { id: 19, symbol: "=" },
   ];
-
+  const addNumber = (number) => {
+    setOutput(() => Number(String(output) + String(number)));
+  };
   return (
     <Container component="main" maxWidth="sm">
       <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 1, md: 3 }}>
         {numbers.map((number) => {
           return (
             <Grid item sm={3}>
-              <Button variant="outlined" key={number.id}>
+              <Button
+                variant="outlined"
+                key={number.id}
+                onClick={() => addNumber(number.symbol)}
+              >
                 {number.symbol}
               </Button>
             </Grid>
