@@ -34,8 +34,12 @@ const CalcButton = ({
     { id: 18, symbol: "." },
     { id: 19, symbol: "=" },
   ];
-  const addNumber = (number) => {
-    setOutput(() => Number(String(output) + String(number)));
+  const InputNumber = (number) => {
+    if (number !== ".") {
+      setOutput(() => Number(String(output) + String(number)));
+    } else {
+      setOutput(() => String(output) + String(number));
+    }
   };
   return (
     <Container component="main" maxWidth="sm">
@@ -46,7 +50,7 @@ const CalcButton = ({
               <Button
                 variant="outlined"
                 key={number.id}
-                onClick={() => addNumber(number.symbol)}
+                onClick={() => InputNumber(number.symbol)}
               >
                 {number.symbol}
               </Button>
