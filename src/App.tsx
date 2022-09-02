@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import InputField from "./components/OutputCalc";
+import OutputCalc from "./components/OutputCalc";
 import CalcButton from "./components/CalcButton";
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
         <Container
           component="main"
           maxWidth="sm"
-          sx={{ backgroundColor: "blue" }}
+          sx={{ backgroundColor: "#34c934" }}
         >
-          <InputField output={output} />
+          <OutputCalc output={output} />
           <CalcButton />
         </Container>
       </>
