@@ -8,7 +8,7 @@ import CalcButton from "./components/CalcButton";
 
 function App() {
   const theme = createTheme();
-  const [firstNumber, setFirstNumber] = useState<number>(0);
+  const [tmpNumber, setTmpNumber] = useState<number>(0);
   const [lastNumber, setLastNumber] = useState<number>(0);
   const [output, setOutput] = useState<number>(0);
 
@@ -19,12 +19,12 @@ function App() {
         <Container
           component="main"
           maxWidth="sm"
-          sx={{ backgroundColor: "#34c934" }}
+          sx={{ backgroundColor: "rgb(00,00,00)" }}
         >
           <OutputCalc output={output} />
           <CalcButton
-            firstNumber={firstNumber}
-            setFirstNumber={setFirstNumber}
+            tmpNumber={tmpNumber}
+            setTmpNumber={setTmpNumber}
             lastNumber={lastNumber}
             setLastNumber={setLastNumber}
             output={output}

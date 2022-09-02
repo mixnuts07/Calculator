@@ -6,7 +6,9 @@ const OutputCalc = ({ output }) => {
   return (
     <>
       <Container component="div">
-        <Typography component="h2">{output}</Typography>
+        <Typography component="h2" sx={{ color: "rgb(255,255,255)" }}>
+          {output}
+        </Typography>
       </Container>
     </>
   );
