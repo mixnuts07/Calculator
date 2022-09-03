@@ -18,7 +18,7 @@ const OutputCalc = ({ output }) => {
 };
 
 const CalcButton = () => {
-  let tmpNumber = 0;
+  const [tmpNumber, setTmpNumber] = useState(0);
   const numbers = [
     { id: 0, symbol: "AC", func: true },
     { id: 1, symbol: "+/-", func: true },
@@ -43,25 +43,20 @@ const CalcButton = () => {
   ];
   const [output, setOutput] = useState<number | string>(0);
   const inputNumber = (number) => {
-    // eslint-disable-next-line no-lone-blocks
-    {
-      tmpNumber === 0
-        ? setOutput(() => String(number))
-        : setOutput(() => number);
-    }
+    setOutput(() => Number(String(output) + String(number)));
   };
   const addNumber = () => {
-    tmpNumber = Number(output);
-    console.log("TMP", tmpNumber);
+    setTmpNumber(Number(output));
+    setOutput("+");
   };
   const displayResult = () => {
     setOutput(() => tmpNumber + Number(output));
-    tmpNumber = 0;
+    setTmpNumber(0);
   };
   useEffect(() => {
     console.log("OUTPUT:", output);
     console.log("TMP:", tmpNumber);
-  }, [output]);
+  }, [output, tmpNumber]);
   return (
     <Container component="main" maxWidth="sm">
       <OutputCalc output={output} />
@@ -78,7 +73,6 @@ const CalcButton = () => {
                       ? () => addNumber()
                       : () => displayResult()
                   }
-                  // onClick={() => addNumber()}
                   sx={{
                     backgroundColor: "rgba(14, 122, 250, 0.8)",
                     color: "rgb(255,255,255)",
