@@ -3,14 +3,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import OutputCalc from "./components/OutputCalc";
 import CalcButton from "./components/CalcButton";
 
 function App() {
   const theme = createTheme();
-  const [tmpNumber, setTmpNumber] = useState<number>(0);
-  const [lastNumber, setLastNumber] = useState<number>(0);
-  const [output, setOutput] = useState<number>(0);
 
   return (
     <ThemeProvider theme={theme}>
@@ -21,15 +17,7 @@ function App() {
           maxWidth="sm"
           sx={{ backgroundColor: "rgb(00,00,00)" }}
         >
-          <OutputCalc output={output} />
-          <CalcButton
-            tmpNumber={tmpNumber}
-            setTmpNumber={setTmpNumber}
-            lastNumber={lastNumber}
-            setLastNumber={setLastNumber}
-            output={output}
-            setOutput={setOutput}
-          />
+          <CalcButton />
         </Container>
       </>
     </ThemeProvider>

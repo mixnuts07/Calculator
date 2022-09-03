@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
-const CalcButton = ({
-  tmpNumber,
-  setTmpNumber,
-  lastNumber,
-  setLastNumber,
-  output,
-  setOutput,
-}) => {
+const OutputCalc = ({ output }) => {
+  return (
+    <>
+      <Container component="div">
+        <Typography component="h2" sx={{ color: "rgb(255,255,255)" }}>
+          {output}
+        </Typography>
+      </Container>
+    </>
+  );
+};
+
+const CalcButton = () => {
+  let tmpNumber = 0;
   const numbers = [
     { id: 0, symbol: "AC", func: true },
     { id: 1, symbol: "+/-", func: true },
@@ -34,15 +41,30 @@ const CalcButton = ({
     { id: 18, symbol: ".", func: true },
     { id: 19, symbol: "=", func: true },
   ];
+  const [output, setOutput] = useState<number | string>(0);
   const inputNumber = (number) => {
-    setOutput(() => Number(String(output) + String(number)));
+    // eslint-disable-next-line no-lone-blocks
+    {
+      tmpNumber === 0
+        ? setOutput(() => String(number))
+        : setOutput(() => number);
+    }
   };
   const addNumber = () => {
-    setTmpNumber(() => output);
-    setOutput(() => Number(output) + Number(lastNumber));
+    tmpNumber = Number(output);
+    console.log("TMP", tmpNumber);
   };
+  const displayResult = () => {
+    setOutput(() => tmpNumber + Number(output));
+    tmpNumber = 0;
+  };
+  useEffect(() => {
+    console.log("OUTPUT:", output);
+    console.log("TMP:", tmpNumber);
+  }, [output]);
   return (
     <Container component="main" maxWidth="sm">
+      <OutputCalc output={output} />
       <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 1, md: 3 }}>
         {numbers.map((number) => {
           return (
@@ -51,7 +73,12 @@ const CalcButton = ({
                 <Button
                   variant="outlined"
                   key={number.id}
-                  onClick={() => addNumber()}
+                  onClick={
+                    number.symbol === "+"
+                      ? () => addNumber()
+                      : () => displayResult()
+                  }
+                  // onClick={() => addNumber()}
                   sx={{
                     backgroundColor: "rgba(14, 122, 250, 0.8)",
                     color: "rgb(255,255,255)",
