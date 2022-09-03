@@ -54,13 +54,16 @@ const CalcButton = () => {
     { id: 19, symbol: "=", func: true },
   ];
   const [output, setOutput] = useState<number | string>(0);
+  // 数字入力
   const Input = (number) => {
     setOutput(() => Number(String(output) + String(number)));
   };
+  // +
   const Add = () => {
     setTmpNumber(Number(output));
     setOutput("+");
   };
+  // =
   const Result = () => {
     setOutput(() => tmpNumber + Number(output));
     setTmpNumber(0);
@@ -81,6 +84,7 @@ const CalcButton = () => {
         {numbers.map((number) => {
           return (
             <Grid item sm={3}>
+              {/* 数字か記号か */}
               {number.func ? (
                 <Button
                   variant="outlined"
