@@ -4,12 +4,24 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import "./button.css";
 
 const OutputCalc = ({ output }) => {
   return (
     <>
-      <Container component="div">
-        <Typography component="h2" sx={{ color: "rgb(255,255,255)" }}>
+      <Container
+        component="div"
+        maxWidth="sm"
+        sx={{ paddingTop: "100px", paddingRight: "40px" }}
+      >
+        <Typography
+          component="h2"
+          sx={{
+            color: "rgb(255,255,255)",
+            textAlign: "right",
+            fontSize: "30px",
+          }}
+        >
           {output}
         </Typography>
       </Container>
@@ -42,14 +54,14 @@ const CalcButton = () => {
     { id: 19, symbol: "=", func: true },
   ];
   const [output, setOutput] = useState<number | string>(0);
-  const inputNumber = (number) => {
+  const Input = (number) => {
     setOutput(() => Number(String(output) + String(number)));
   };
-  const addNumber = () => {
+  const Add = () => {
     setTmpNumber(Number(output));
     setOutput("+");
   };
-  const displayResult = () => {
+  const Result = () => {
     setOutput(() => tmpNumber + Number(output));
     setTmpNumber(0);
   };
@@ -60,7 +72,12 @@ const CalcButton = () => {
   return (
     <Container component="main" maxWidth="sm">
       <OutputCalc output={output} />
-      <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 1, md: 3 }}>
+      <Grid
+        container
+        rowSpacing={1}
+        columnSpacing={1}
+        sx={{ margin: "0 auto" }}
+      >
         {numbers.map((number) => {
           return (
             <Grid item sm={3}>
@@ -68,11 +85,7 @@ const CalcButton = () => {
                 <Button
                   variant="outlined"
                   key={number.id}
-                  onClick={
-                    number.symbol === "+"
-                      ? () => addNumber()
-                      : () => displayResult()
-                  }
+                  onClick={number.symbol === "+" ? () => Add() : () => Result()}
                   sx={{
                     backgroundColor: "rgba(14, 122, 250, 0.8)",
                     color: "rgb(255,255,255)",
@@ -82,9 +95,10 @@ const CalcButton = () => {
                 </Button>
               ) : (
                 <Button
+                  className="glow-on-hover"
                   variant="outlined"
                   key={number.id}
-                  onClick={() => inputNumber(number.symbol)}
+                  onClick={() => Input(number.symbol)}
                   sx={{
                     backgroundColor: "rgba(14, 122, 250, 0.8)",
                     color: "rgb(255,255,255)",

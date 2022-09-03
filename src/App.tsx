@@ -15,7 +15,7 @@ function App() {
         <Container
           component="main"
           maxWidth="sm"
-          sx={{ backgroundColor: "rgb(00,00,00)" }}
+          sx={{ backgroundColor: "rgb(00,00,00)", height: "100vh" }}
         >
           <CalcButton />
         </Container>
